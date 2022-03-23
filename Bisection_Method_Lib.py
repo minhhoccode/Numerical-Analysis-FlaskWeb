@@ -18,7 +18,6 @@ def checkCondition(f_input , a , b , n, pp):
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
 
-
     if pp=="chia đôi":
         #đk 1: tồn tại nghiệm x*
         if(min(Y)*max(Y)>0):
