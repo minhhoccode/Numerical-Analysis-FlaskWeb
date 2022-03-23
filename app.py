@@ -1,28 +1,28 @@
-from flask import Flask, render_template,Response, request, url_for
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from flask import Flask, render_template,Response, request, url_for
 from matplotlib.figure import Figure
 import Bisection_Method_Lib
 import stringhandling
 from sympy import *
 import numpy as np
 import io
-from fractions import Fraction
+
 app = Flask(__name__)
-#global Var
+
 @app.route('/')
+
 def home():
     # if os.path.isfile('./templates/solArr.txt'):
     #     os.remove('./templates/solArr.txt')
     # if os.path.isfile('./templates/errArr.txt'):
     #     os.remove('./templates/errArr.txt')
-    #hoạt động nhập xuất file để kết nối flask và javascripts
-    #thông qua promise fs vô cùng thiếu ổn định
+    #hoạt động nhập xuất file để kết nối flask và 
+    # javascripts thông qua promise fs vô cùng thiếu ổn định
     #  nên em đã sử dụng build in của flask
     return render_template("index.html")
 
 
 @app.route('/plot_png')
-
 
 def plot_png():
     fig = create_figure()
@@ -31,8 +31,6 @@ def plot_png():
     return Response(output.getvalue(), mimetype='image/png')
     #Response này có kiểu dữ liệu trả về html không đọc 
     # được nên em dẫn link trực tiếp đến hình ảnh
-    img =  Response(output.getvalue(), mimetype='image/png')
-    return render_template("plot_png.html", img )
 def create_figure():
     global f_input,a,b
     fig = Figure()
@@ -46,6 +44,7 @@ def create_figure():
     return fig
 
 @app.route('/calc' , methods=['POST' , 'GET'])
+
 def calc():
     global f_input,n,a,b, solArr, errArr,pp, f_latex,pp
     f_input = request.form['f(x)']
@@ -59,6 +58,7 @@ def calc():
     x = symbols('x')
     f1 = eval(f_input)
     f_latex = latex(f1)
+
     if(Bisection_Method_Lib.checkCondition(f_input,a,b,n,pp)):
         if(pp == "chia đôi"):
             solArr , errArr = Bisection_Method_Lib.bisection (  f_input, a , b , n )
@@ -76,6 +76,7 @@ def calc():
 
 
 @app.route('/table', methods = ['GET', 'POST'])
+
 def table():
     global f_input,n,a,b, solArr, errArr,pp
     # with open("./templates/solArr.txt", "w") as fo:
@@ -86,6 +87,8 @@ def table():
     #         fo.write( str(errArr[_])+ ",")
     return render_template("table.html", f = f_input, a= a, b=b, n=n, solArr = solArr, errArr = errArr)
 
+# from routes import *
+# from pyfladesk import init_gui #dùng khi build ứng dụng
 if __name__ == '__main__':
-    app.run() #dùng khi build web
+    app.run()       #dùng khi build web
     # init_gui(app) #dùng khi muốn build ra ứng dụng

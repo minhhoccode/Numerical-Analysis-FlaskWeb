@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import array as arr
 
+
 def checkCondition(f_input , a , b , n, pp):
     # Kiểm Tra điều kiện thực hiện phương pháp
 
@@ -17,32 +18,25 @@ def checkCondition(f_input , a , b , n, pp):
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
 
-
     if pp=="chia đôi":
-        if(min(dY)*max(dY)>0): # Giả sử hàm số liên tục thì tồn tại nghiệm x khi và chỉ khi min max trái dấu
+        #đk 1: tồn tại nghiệm x*
+        if(min(Y)*max(Y)>0):
             return False
-        if(f(a)*f(b)>0):
+        #đk 2: f(a)*f(b) < 0
+        if(f(a)*f(b)>=0):
             return False
         return True
 
-    if(pp == "newton"):
+    if(pp == "newton" or pp == "newton cải biên"):
+        #đk 1: f' và f'' không đổi dấu trên [a,b]
         if min(dY)*max(dY)<0:
             return False
         if min(ddY)*max(ddY)<0:
             return False
-        if f(a)*f(b) > 0:
+        #điều kiện 2: f(a)*f(b) < 0
+        if f(a)*f(b) >= 0:
             return False
         return True
-        
-    if(pp == "newton cải biên"):
-        if min(dY)*max(dY)<0:
-            return False
-        if min(ddY)*max(ddY)<0:
-            return False
-        if f(a)*f(b) > 0:
-            return False
-        return True
-
 
     if(pp == "lặp điểm bất động"):
         x = symbols ('x')
@@ -50,10 +44,13 @@ def checkCondition(f_input , a , b , n, pp):
         g = lambda x: eval(f_input)
         X = np.linspace(a,b,int((b-a)/3*101))
         Y = [g(x) for x in X]
-        if(max(Y)>b or min(Y) < a):
+        # điều kiện 1: g (x) ∈ [a, b] ∀x ∈ [a, b]; 
+        if(max(Y)>b or min(Y) < a): 
             return False
         dg = lambda x: g(t).diff().subs(t,x)
         dY = [dg(x) for x in X]
+        #điều kiện 2 : ∃q < 1, ∀x, y ∈ [a, b]:
+                #|g (x) − g (y)| ≤ q |x − y| 
         if(max(dY)>=1):
             return False
         return True
@@ -85,8 +82,7 @@ def newton(f_input, a, b, n):
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
     #df, ddf không đổi dấu 
-    # b) Phương pháp newton sau 3 bước lặp
-    # c) tìm sai số của câu b
+    #Phương pháp newton sau n bước lặp
     #chọn x0 sao cho f(x0)*ddf>0 (chọn 1 trong 2 cận a,b )
     if(f(a)*ddf(a)>=0):
         x0 = a
@@ -94,8 +90,6 @@ def newton(f_input, a, b, n):
         x0 = b
     M = max(ddY)
     m = min( abs(df(a)),abs(df(b)))
-
-
     for _ in range (n):
         x = x0 - f(x0)/df(x0)
         ss = ( M / (2*m) ) * (x - x0)**2
@@ -104,6 +98,8 @@ def newton(f_input, a, b, n):
         sol.append(x)
         err.append(ss)
     return sol, err
+
+
 
 def newtonExplain(f_input, a, b, n):
 
@@ -130,6 +126,8 @@ def newtonExplain(f_input, a, b, n):
         sol.append(x)
         err.append(ss)
     return sol, err
+
+    
 
 def repeatFixedPoint(f_input , a , b , n):
     sol, err = arr.array('d'),arr.array('d')
