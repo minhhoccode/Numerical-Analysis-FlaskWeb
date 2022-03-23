@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="">Trợ giúp</a></li>
+                <li><a>Về tôi </a></li>
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact action="/calc" method="post">
+      <h3>Toán Học Tính Toán</h3>
+      <h4>các loại phuong phap :Đ </h4>
+      <fieldset>
+        <input name = "f(x)" placeholder="nhập f(x)" type="text" tabindex="1" required autofocus>
+      </fieldset>
+      <fieldset>
+        <input name = "ab_input" placeholder="Nhập a , b" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+          <input name = "n_input" placeholder="nhập n" type="text" tabindex="2" required>
+      </fieldset>
+      <fieldset>
+        <select id="choosen" name="choosen">
+            <option value = "chia đôi">Phương pháp chia đôi</option>
+            <option value = "newton">phương pháp newton</option>
+            <option value = "newton cải biên">Phương pháp newton cải biên</option>
+            <option value = "lặp điểm bất động">Lặp điểm bất động</option>
+        </select>
+      </fieldset>
+      <fieldset> 
+        <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Tính toán</button>
+      </fieldset>
+    </form>
+  </div>
+
+</body>
+
+
+</html>

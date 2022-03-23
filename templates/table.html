@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="nav-links">
+        <ul>
+            <li><a href= "{{url_for('home')}}">Trang chủ</a></li> 
+            <li><a href="">Trợ giúp</a></li>
+            <li><a>Về tôi </a></li>
+        </ul>
+        <div id="text-table"></div>
+    </div>
+</body>
+
+<script type="text/javascript">
+var sol = '{{solArr}}';
+var err = '{{errArr}}';
+sol = sol.replace('[','');
+sol = sol.replace('])','');
+err = err.replace('[','');
+err = err.replace('])','');
+let solArr = sol.split (',');
+let errArr = err.split (',');
+
+solArr.shift();
+errArr.shift();
+
+
+for(let i = 0; i < solArr.length; i++){
+    for(let j = 0; j < solArr[i].length; j++){
+        if(solArr[i][j]=='e'){
+            solArr[i][j] = '^{';
+            solArr[i].push('}');
+        }
+    }
+}
+
+var table =
+'<table><thead><tr><th>Số lần lặp</th><th>Nghiệm x</th><th>Sai số</th></tr></thead><tbody></tbody>';
+
+for (var i = 0; i < solArr.length; i++) {  
+    table += '<tr><td>' + (i + 1) + '</td><td>' + solArr[i] + '</td><td>' + errArr[i] + '</td></tr>';
+}
+table += '</tbody></table>';
+document.getElementById("text-table").innerHTML = table;
+</script>
+
+</html>

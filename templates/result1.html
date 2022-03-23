@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body >
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href= "{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="">Trợ giúp</a></li>
+                <li><a>Về tôi </a></li>
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact>
+      <h3>Kết quả của phương pháp {{pp}} </h3>
+      <h5> \[f(x) = {{f_latex}}\] </h5>
+       <h5>  \[  a = {{a}} \] 
+        \[b = {{b}}\]  <br>
+      </h5>
+
+          không thỏa mãn điều kiện thực hiện phương pháp
+      </h5>
+    </form>
+  </div>
+
+</body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+  console.log('{{f_latex}}');
+  </script>
+</html>
