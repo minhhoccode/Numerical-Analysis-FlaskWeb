@@ -12,13 +12,6 @@ app = Flask(__name__)
 @app.route('/')
 
 def home():
-    # if os.path.isfile('./templates/solArr.txt'):
-    #     os.remove('./templates/solArr.txt')
-    # if os.path.isfile('./templates/errArr.txt'):
-    #     os.remove('./templates/errArr.txt')
-    #hoạt động nhập xuất file để kết nối flask và 
-    # javascripts thông qua promise fs vô cùng thiếu ổn định
-    #  nên em đã sử dụng build in của flask
     return render_template("index.html")
 
 
@@ -58,7 +51,8 @@ def calc():
     x = symbols('x')
     f1 = eval(f_input)
     f_latex = latex(f1)
-
+    if(b - a <=0 ):
+        a, b = b ,a
     if(Bisection_Method_Lib.checkCondition(f_input,a,b,n,pp)):
         if(pp == "chia đôi"):
             solArr , errArr = Bisection_Method_Lib.bisection (  f_input, a , b , n )
@@ -79,12 +73,6 @@ def calc():
 
 def table():
     global f_input,n,a,b, solArr, errArr,pp
-    # with open("./templates/solArr.txt", "w") as fo:
-    #     for _ in range (len(solArr)):
-    #         fo.write( str(solArr[_])+ ",")
-    # with open("./templates/errArr.txt", "w") as fo:
-    #     for _ in range (len(errArr)):
-    #         fo.write( str(errArr[_])+ ",")
     return render_template("table.html", f = f_input, a= a, b=b, n=n, solArr = solArr, errArr = errArr)
 
 # from routes import *
