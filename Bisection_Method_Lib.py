@@ -17,7 +17,9 @@ def checkCondition(f_input , a , b , n, pp):
     ddf = lambda x: f(t).diff(t,2).subs(t,x)
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
-
+    
+    if b - a <= 0:
+        return False
     if pp=="chia đôi":
         #đk 1: tồn tại nghiệm x*
         if(min(Y)*max(Y)>0):
