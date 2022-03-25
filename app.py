@@ -39,10 +39,13 @@ def create_figure():
 @app.route('/calc' , methods=['POST' , 'GET'])
 
 def calc():
-    global f_input,n,a,b, solArr, errArr,pp, f_latex,pp
+    global f_input,n,a,b, solArr, errArr,pp, f_latex,n_choose, sllArr
     f_input = request.form['f(x)']
     f_input = stringhandling.stringhandling(f_input)
-    n = int(request.form['n_input'])
+    n_choose  = str(request.form['n_choose'])
+    n = str(request.form['n_input'])
+    n = stringhandling.stringhandling(n)
+    n = eval(n)
     txt = request.form['ab_input']
     pp = str(request.form['choosen'])
     strs = txt.split (',')
@@ -53,20 +56,21 @@ def calc():
     f_latex = latex(f1)
     if(b - a <=0 ):
         a, b = b ,a
-    if(Bisection_Method_Lib.checkCondition(f_input,a,b,n,pp)):
+    if(Bisection_Method_Lib.checkCondition(f_input,a,b,pp)):
         if(pp == "chia đôi"):
-            solArr , errArr = Bisection_Method_Lib.bisection (  f_input, a , b , n )
+            solArr , errArr, sllArr = Bisection_Method_Lib.bisection (  f_input, a , b , n, n_choose )
         if(pp == "newton"):
-            solArr , errArr = Bisection_Method_Lib.newton(f_input , a , b , n)
+            solArr , errArr, sllArr = Bisection_Method_Lib.newton(f_input , a , b , n, n_choose )
         if(pp == "newton cải biên"):
-            solArr , errArr = Bisection_Method_Lib.newtonExplain(  f_input , a , b , n)
+            solArr , errArr, sllArr = Bisection_Method_Lib.newtonExplain(  f_input , a , b , n, n_choose )
         if(pp == "lặp điểm bất động"):
-            solArr , errArr = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n)
-    if(Bisection_Method_Lib.checkCondition(f_input , a , b , n,pp) == False):
-        return render_template("result1.html", f = f_input, n = n,a=a,b=b, pp = pp, f_latex = f_latex)
+            solArr , errArr, sllArr = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n, n_choose )
+    if(Bisection_Method_Lib.checkCondition(f_input , a , b , pp) == False):
+        return render_template("result1.html", f = f_input,a=a,b=b, pp = pp, f_latex = f_latex)
     sol = solArr[-1]
     err = errArr[-1]
-    return render_template('result.html', f = f_input, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex)
+    sll = sllArr[-1]
+    return render_template('result.html', f = f_input, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
 
 
 @app.route('/table', methods = ['GET', 'POST'])

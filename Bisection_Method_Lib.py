@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 import array as arr
 
 
-def checkCondition(f_input , a , b , n, pp):
+def checkCondition(f_input , a , b , pp):
     # Kiểm Tra điều kiện thực hiện phương pháp
-
 
     x = symbols('x')
     t = symbols('t')
@@ -17,7 +16,6 @@ def checkCondition(f_input , a , b , n, pp):
     ddf = lambda x: f(t).diff(t,2).subs(t,x)
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
-
 
     if pp=="chia đôi":
         #đk 1: tồn tại nghiệm x*
@@ -57,23 +55,50 @@ def checkCondition(f_input , a , b , n, pp):
         return True
 
 
-def bisection ( f_input , a , b , n):
-    sol, err = arr.array('d'),arr.array('d')
+
+
+
+
+
+
+
+
+
+
+
+
+
+def bisection ( f_input , a , b , n, n_choose):
+    sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     f = lambda x : eval (f_input)
-    for _ in range ( n ):
-        c = ( a + b ) / 2
-        if f ( a ) * f ( c ) < 0:
-            b = c
-        else :
-            a = c
-        sol.append(a)
-        err.append(b-a)
-        print(_+1, sol[_], err[_])
-    return sol, err
+    if n_choose == 'n':
+        for _ in range ( n ):
+            c = ( a + b ) / 2
+            if f ( a ) * f ( c ) < 0:
+                b = c
+            else :
+                a = c
+            sol.append(a)
+            err.append(b-a)
+            sll.append(_+1)
+    if n_choose == 'ss':
+        _ = int(0)
+        while b - a >= n:
+            _=_+1
+            c = ( a + b ) / 2
+            if f ( a ) * f ( c ) < 0:
+                b = c
+            else :
+                a = c
+            sol.append(a)
+            err.append(b-a)
+            sll.append(_)
+            print(_, a, b-a)
+    return sol, err, sll
 
 
-def newton(f_input, a, b, n):
-    sol, err = arr.array('d'),arr.array('d')
+def newton(f_input, a, b, n, n_choose):
+    sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     x = symbols('x')
     t = symbols('t')
     f = lambda x : eval (f_input)
@@ -91,21 +116,32 @@ def newton(f_input, a, b, n):
         x0 = b
     M = max(ddY)
     m = min( abs(df(a)),abs(df(b)))
-    for _ in range (n):
-        x = x0 - f(x0)/df(x0)
-        ss = ( M / (2*m) ) * (x - x0)**2
-        x0 = x
-        print(_+1,x,ss)
-        sol.append(x)
-        err.append(ss)
-    return sol, err
+    if n_choose == 'n':
+        for _ in range (n):
+            x = x0 - f(x0)/df(x0)
+            ss = ( M / (2*m) ) * (x - x0)**2
+            x0 = x
+            print(_+1,x,ss)
+            sol.append(x)
+            err.append(ss)
+            sll.append(_+1)
+    if n_choose == 'ss':
+        _ = int(0)
+        while True:
+            _=_+1
+            x = x0 - f(x0)/df(x0)
+            ss = ( M / (2*m) ) * (x - x0)**2
+            x0 = x
+            sol.append(x)
+            err.append(ss)
+            sll.append(_)
+            if ss < n:
+                break
+    return sol, err, sll
 
 
-
-def newtonExplain(f_input, a, b, n):
-
-
-    sol, err = arr.array('d'),arr.array('d')
+def newtonExplain(f_input, a, b, n, n_choose):
+    sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     x = symbols('x')
     t = symbols('t')
     f = lambda x : eval (f_input)
@@ -118,20 +154,33 @@ def newtonExplain(f_input, a, b, n):
         x0 = a
     if(f(b)*ddf(a)>0):
         x0 = b
+    temp = x0
     M = max(ddY)
     m = min( abs(df(a)), abs(df(b)) )
-    for _ in range (n):
-        x = x0 - f(x0)/df(b)
-        ss = ( M / (2*m) ) * (x - x0)**2
-        x0 = x
-        sol.append(x)
-        err.append(ss)
-    return sol, err
+    if n_choose == 'n':
+        for _ in range (n):
+            x = x0 - f(x0)/df(temp)
+            ss = ( M / (2*m) ) * (x - x0)**2
+            x0 = x
+            sol.append(x)
+            err.append(ss)
+            sll.append(_+1)
+    _ = int(0)
+    if n_choose == 'ss':
+        while True:
+            _=_+1
+            x = x0 - f(x0)/df(temp)
+            ss = ( M / (2*m) ) * (x - x0)**2
+            x0 = x
+            sol.append(x)
+            err.append(ss)
+            sll.append(_)
+            if ss < n:
+                break
+    return sol, err, sll
 
-    
-
-def repeatFixedPoint(f_input , a , b , n):
-    sol, err = arr.array('d'),arr.array('d')
+def repeatFixedPoint(f_input , a , b , n, n_choose):
+    sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     x = symbols ('x')
     t = symbols ('t')
     g = lambda x: eval(f_input)
@@ -141,12 +190,26 @@ def repeatFixedPoint(f_input , a , b , n):
     dY = [dg(x) for x in X]
     q = max(dY)
     x0 = (a + b)/2
-    for _ in range (n):
-        x = x0
-        x = g(x)
-        ss = q/(1-q)*abs(x-x0)
-        x0 = x 
-        sol.append(x)
-        err.append(ss)
-        print(_+1, x, ss)
-    return sol, err
+    if n_choose == 'n':
+        for _ in range (n):
+            x = x0
+            x = g(x)
+            ss = q/(1-q)*abs(x-x0)
+            x0 = x 
+            sol.append(x)
+            err.append(ss)
+            sll.append(_+1)
+    if n_choose == 'ss':
+        _ = int(0)
+        while True:
+            _=_+1
+            x = x0
+            x = g(x)
+            ss = q/(1-q)*abs(x-x0)
+            x0 = x 
+            sol.append(x)
+            err.append(ss)
+            sll.append(_)
+            if ss < n:
+                break
+    return sol, err, sll
