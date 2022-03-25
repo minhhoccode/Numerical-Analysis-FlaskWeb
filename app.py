@@ -67,9 +67,11 @@ def calc():
             solArr , errArr, sllArr = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n, n_choose )
     if(Bisection_Method_Lib.checkCondition(f_input , a , b , pp) == False):
         return render_template("result1.html", f = f_input,a=a,b=b, pp = pp, f_latex = f_latex)
-    sol = solArr[-1]
-    err = errArr[-1]
+    sol = str(solArr[-1])
+    err = str(errArr[-1])
     sll = sllArr[-1]
+    err = stringhandling.handleFloat(err)
+    sol = stringhandling.handleFloat(sol)
     return render_template('result.html', f = f_input, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
 
 
@@ -79,8 +81,8 @@ def table():
     global f_input,n,a,b, solArr, errArr,pp
     return render_template("table.html", f = f_input, a= a, b=b, n=n, solArr = solArr, errArr = errArr)
 
-# from routes import *
-# from pyfladesk import init_gui #dùng khi build ứng dụng
+from routes import *
+from pyfladesk import init_gui #dùng khi build ứng dụng
 if __name__ == '__main__':
-    app.run()       #dùng khi build web
-    # init_gui(app) #dùng khi muốn build ra ứng dụng
+    # app.run()       #dùng khi build web
+    init_gui(app) #dùng khi muốn build ra ứng dụng

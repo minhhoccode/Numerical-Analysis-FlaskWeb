@@ -93,7 +93,7 @@ def bisection ( f_input , a , b , n, n_choose):
             sol.append(a)
             err.append(b-a)
             sll.append(_)
-            print(_, a, b-a)
+            # print(_, a, b-a)
     return sol, err, sll
 
 
@@ -121,7 +121,7 @@ def newton(f_input, a, b, n, n_choose):
             x = x0 - f(x0)/df(x0)
             ss = ( M / (2*m) ) * (x - x0)**2
             x0 = x
-            print(_+1,x,ss)
+            # print(_+1,x,ss)
             sol.append(x)
             err.append(ss)
             sll.append(_+1)
