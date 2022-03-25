@@ -151,6 +151,11 @@ main {
 #contact button[type="submit"] {
   font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
 }
+#contact select#n_choose,
+#contact button[type="submit"] {
+  font: 400 12px/16px "Roboto", Helvetica, Arial, sans-serif;
+}
+
 
 #contact {
   right: 10px;
@@ -181,7 +186,7 @@ main {
 fieldset {
   border: medium none !important;
   margin: 0 0 10px;
-  min-width: 100%;
+  /* min-width: 100%; */
   padding: 0;
   width: 100%;
 }
@@ -200,8 +205,32 @@ fieldset {
   color: #88888C;
   background-color: #F5FBF8;
 }
+.sameline{
+  display: inline-block;
+}
 
-#contact input[type="text"]:hover,
+#contact input[type="text-sameline"]{
+  width: 69%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  border:none;
+  color: #88888C;
+  background-color: #F5FBF8;
+}
+#contact select#n_choose {
+  width: 30%;
+  border: 1px solid #ccc;
+  background: #FFF;
+  margin: 0 0 5px;
+  padding: 10px;
+  border:none;
+  color: #88888C;
+  background-color: #F5FBF8;
+}
+
+/* #contact input[type="text"]:hover,
 #contact input[type="email"]:hover,
 #contact input[type="tel"]:hover,
 #contact input[type="url"]:hover,
@@ -211,6 +240,13 @@ fieldset {
   transition: border-color 0.1s ease-in-out;
   border: 1px solid #c1c1c1;
 }
+#contact select#n_choose:hover {
+  display: inline-block;
+  -webkit-transition: border-color 0.3s ease-in-out;
+  -moz-transition: border-color 0.1s ease-in-out;
+  transition: border-color 0.1s ease-in-out;
+  border: 1px solid #c1c1c1;
+} */
 
 #contact button[type="submit"] {
   cursor: pointer;

@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Numberical Method</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <body>
 
@@ -17,8 +16,9 @@
         <div class="nav-links">
             <ul>
                 <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
-                <li><a href="">Trợ giúp</a></li>
-                <li><a>Về tôi </a></li>
+                                <li><a href="https://www.google.com">Trợ giúp</a></li>
+                                <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+
             </ul>
         </div>
     </nav>
@@ -29,8 +29,8 @@
       <h5> \[f(x) = {{f_latex}}\] </h5>
        <h5>  \[  a = {{a}} \] 
         \[b = {{b}}\]  <br>
-         Nghiệm gần đúng : \[ x_{[{{n}}]} = {{sol}} \] <br>
-         Sai số  \[ss_{[{{n}}]} = {{err}}\] <br>
+         Nghiệm gần đúng : \[ x_{[{{sll}}]} = {{sol}} \] <br>
+         Sai số  \[ss_{[{{sll}}]} = {{err}}\] <br>
 
       </h5>
 
@@ -43,8 +43,6 @@
     </form>
   </div>
 
-
-  
 </body>
 <script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
 console.log('{{f_latex}}');
