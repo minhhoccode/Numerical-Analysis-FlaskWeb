@@ -6,7 +6,7 @@
 
 * Công nghệ web có ưu điểm lớn chính là việc có thể chạy được trên mọi nền tảng
 
-* Ngôn ngữ html có khả năng hiển thị tốt, cộng đồng người phát triển đông đảo và đặc biệt là khả năng hiển thị toán học của nó vô cùng tốt
+* Ngôn ngữ html có khả năng hiển thị tốt, cộng đồng người phát triển đông đảo và khả năng hiển thị toán học của nó vô cùng tốt
 
 * Và đặc biệt hơn, khi kết hợp với pyqt5 nó có thể build ra ứng dụng chạy local như pyqt5
 
