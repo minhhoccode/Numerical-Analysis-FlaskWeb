@@ -84,5 +84,5 @@ def table():
 from routes import *
 from pyfladesk import init_gui #dùng khi build ứng dụng
 if __name__ == '__main__':
-    # app.run()       #dùng khi build web
-    init_gui(app) #dùng khi muốn build ra ứng dụng
+    app.run()       #dùng khi build web
+#     init_gui(app) #dùng khi muốn build ra ứng dụng
