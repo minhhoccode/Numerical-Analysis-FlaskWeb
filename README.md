@@ -8,7 +8,7 @@
 
 * Ngôn ngữ html có khả năng hiển thị tốt, cộng đồng người phát triển đông đảo và khả năng hiển thị toán học của nó vô cùng tốt
 
-* Và đặc biệt hơn, khi kết hợp với pyqt5 nó có thể build ra ứng dụng chạy local như pyqt5
+* Đặc biệt hơn, khi kết hợp với pyqt5 nó có thể build ra ứng dụng chạy local như pyqt5
 
 ![image](https://user-images.githubusercontent.com/90856792/160170555-08ca724e-cc1a-4a76-8a48-f0fad9569bd4.png)
 
