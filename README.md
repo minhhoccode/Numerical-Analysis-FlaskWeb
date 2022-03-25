@@ -10,10 +10,10 @@
 
 * Và đặc biệt hơn, khi kết hợp với pyqt5 nó có thể build ra ứng dụng chạy local như pyqt5
 
-![image](https://user-images.githubusercontent.com/90856792/159739409-17d33a84-5dcf-47e3-931a-f415530ed987.png)
+![image](https://user-images.githubusercontent.com/90856792/160170555-08ca724e-cc1a-4a76-8a48-f0fad9569bd4.png)
 
 
-![image](https://user-images.githubusercontent.com/90856792/159737875-d25d836b-7b6b-47ed-a1b4-9e97b5c6ed03.png)
+![image](https://user-images.githubusercontent.com/90856792/160170668-85b2d034-93e6-4c39-9b01-1b2bb67a7d8a.png)
 
 ## cấu trúc chương trình
 
