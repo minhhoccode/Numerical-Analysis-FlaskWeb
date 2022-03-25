@@ -81,8 +81,8 @@ def table():
     global f_input,n,a,b, solArr, errArr,pp
     return render_template("table.html", f = f_input, a= a, b=b, n=n, solArr = solArr, errArr = errArr)
 
-from routes import *
-from pyfladesk import init_gui #dùng khi build ứng dụng
+# from routes import *
+# from pyfladesk import init_gui #dùng khi build ứng dụng
 if __name__ == '__main__':
     app.run()       #dùng khi build web
 #     init_gui(app) #dùng khi muốn build ra ứng dụng
