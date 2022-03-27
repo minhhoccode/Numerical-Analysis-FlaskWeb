@@ -1,11 +1,29 @@
-from sympy import symbols
+from sympy import *
 import numpy as np
 import matplotlib.pyplot as plt
 import array as arr
-
+import math
 
 def checkCondition(f_input , a , b , pp):
     # Kiểm Tra điều kiện thực hiện phương pháp
+
+    if(pp == "lặp điểm bất động"):
+        x = symbols ('x')
+        t = symbols ('t')
+        g = lambda x: eval(f_input)
+        X = np.linspace(a,b,int((b-a)/3*101))
+        Y = [g(x) for x in X]
+        # điều kiện 1: g (x) ∈ [a, b] ∀x ∈ [a, b]; 
+        if(max(Y)>b or min(Y) < a): 
+            return False
+        dg = lambda x: g(t).diff().subs(t,x)
+        dY = [dg(x) for x in X]
+        #điều kiện 2 : ∃q < 1, ∀x, y ∈ [a, b]:
+                #|g (x) − g (y)| ≤ q |x − y| 
+        if(max(dY)>=1):
+            return False
+        return True
+
 
     x = symbols('x')
     t = symbols('t')
@@ -34,23 +52,6 @@ def checkCondition(f_input , a , b , pp):
             return False
         #điều kiện 2: f(a)*f(b) < 0
         if f(a)*f(b) >= 0:
-            return False
-        return True
-
-    if(pp == "lặp điểm bất động"):
-        x = symbols ('x')
-        t = symbols ('t')
-        g = lambda x: eval(f_input)
-        X = np.linspace(a,b,int((b-a)/3*101))
-        Y = [g(x) for x in X]
-        # điều kiện 1: g (x) ∈ [a, b] ∀x ∈ [a, b]; 
-        if(max(Y)>b or min(Y) < a): 
-            return False
-        dg = lambda x: g(t).diff().subs(t,x)
-        dY = [dg(x) for x in X]
-        #điều kiện 2 : ∃q < 1, ∀x, y ∈ [a, b]:
-                #|g (x) − g (y)| ≤ q |x − y| 
-        if(max(dY)>=1):
             return False
         return True
 
@@ -192,6 +193,7 @@ def repeatFixedPoint(f_input , a , b , n, n_choose):
     x = symbols ('x')
     t = symbols ('t')
     g = lambda x: eval(f_input)
+    print(g(x))
     X = np.linspace(a,b,int((b-a)/3*101))
     Y = [g(x) for x in X]
     dg = lambda x: g(t).diff().subs(t,x)

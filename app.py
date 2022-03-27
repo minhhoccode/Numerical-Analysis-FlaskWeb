@@ -6,6 +6,7 @@ import stringhandling
 from sympy import *
 import numpy as np
 import io
+import math
 
 app = Flask(__name__)
 
@@ -45,6 +46,8 @@ def create_figure():
 def calc():
     global f_input,n,a,b, solArr, errArr,pp, f_latex,n_choose, sllArr, min_df, max_df, min_ddf, max_ddf, f_a , f_b, sol, err, sll,x0
     f_input = request.form['f(x)']
+    # f_input = '(x**2 + 3)**math.log(5,3)'
+    f_input = str(f_input)
     f_input = stringhandling.stringhandling(f_input)
     n_choose  = str(request.form['n_choose'])
     n = str(request.form['n_input'])

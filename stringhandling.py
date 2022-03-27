@@ -10,7 +10,10 @@ def stringhandling(f_input):
                 f_input = f_input.replace(f_input[i]+ num[j],"x*" + num[j])
             if f_input[i+1] == "x" and f_input[i] == num[j]:
                 f_input = f_input.replace(num[j]+f_input[i+1], num[j]+"*x")
+            if f_input[i+1] == "e" and f_input[i] == num[j]:
+                f_input = f_input.replace(num[j]+f_input[i+1], num[j]+"*")
     # print(f_input)
+    
     return f_input
 def handleFloat(STRING):
     check = False
