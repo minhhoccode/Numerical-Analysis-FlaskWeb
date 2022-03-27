@@ -114,7 +114,12 @@ def Newton(f_input, a, b, n, n_choose):
         x0 = a
     if(f(b)*ddf(a)>=0):
         x0 = b
-    M = max(ddY)
+
+    e = x0
+    if abs(max(ddY)) > abs(min(ddY)):
+        M = abs(max(ddY))
+    if abs(max(ddY)) < abs(min(ddY)):
+        M = abs(min(ddY))
     m = min( abs(df(a)),abs(df(b)))
     if n_choose == 'n':
         for _ in range (n):
@@ -137,7 +142,7 @@ def Newton(f_input, a, b, n, n_choose):
             sll.append(_)
             if ss < n:
                 break
-    return sol, err, sll, min(dY), max(dY), min(ddY), max(ddY), f(a) , f(b)
+    return sol, err, sll, min(dY), max(dY), min(ddY), max(ddY), f(a) , f(b), e, M, m
 
 
 def NewtonExplain(f_input, a, b, n, n_choose):
@@ -155,7 +160,10 @@ def NewtonExplain(f_input, a, b, n, n_choose):
     if(f(b)*ddf(a)>0):
         x0 = b
     temp = x0
-    M = max(ddY)
+    if abs(max(ddY)) > abs(min(ddY)):
+        M = abs(max(ddY))
+    if abs(max(ddY)) < abs(min(ddY)):
+        M = abs(min(ddY))
     m = min( abs(df(a)), abs(df(b)) )
     if n_choose == 'n':
         for _ in range (n):
@@ -177,7 +185,7 @@ def NewtonExplain(f_input, a, b, n, n_choose):
             sll.append(_)
             if ss < n:
                 break
-    return sol, err, sll
+    return sol, err, sll, min(dY), max(dY), min(ddY), max(ddY), f(a) , f(b), temp, M, m
 
 def repeatFixedPoint(f_input , a , b , n, n_choose):
     sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
