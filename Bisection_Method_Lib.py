@@ -20,7 +20,7 @@ def checkCondition(f_input , a , b , pp):
         dY = [dg(x) for x in X]
         #điều kiện 2 : ∃q < 1, ∀x, y ∈ [a, b]:
                 #|g (x) − g (y)| ≤ q |x − y| 
-        if(max(dY)>=1):
+        if(abs(max(dY))>=1 or abs(min(dY))>=1):
             return False
         return True
 
@@ -222,4 +222,4 @@ def repeatFixedPoint(f_input , a , b , n, n_choose):
             sll.append(_)
             if ss < n:
                 break
-    return sol, err, sll
+    return sol, err, sll, dg, dY, ((a+b)/2), Y

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="https://www.google.com">Trợ giúp</a></li>
+                <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact>
+      <h3>Giải chi tiết theo phương pháp {{pp}} </h3>
+      <p> \[f(x) = {{f_latex}}\] </p>
+      <p>  \[  a = {{a}} \] 
+        \[b = {{b}}\]  <br>
+         <h3>Giải</h3>
+      <p>Ta có: <br>
+        \[min(g_{(x)}) = {{min_f}} ≤ g_{(x)} = {{f_latex}} ≤ max(g_{(x)}) = {{max_f}},  \quad ∀x ∈ [{{a}}, {{b}}] .\]
+        \[a = {{a}} ≤ min(g_{(x)})= {{min_f}}\] 
+        \[ b = {{b}} ≥ max(g_{(x)}) = {{max_f}} \]
+        ⇒Thỏa mãn điều kiện 1 : g (x) ∈ [a, b] ∀x ∈ [a, b];<br>
+        Mặt khác : <br>
+
+    </p>
+    <p>        \[ |g'_{(x)}| ≤ q = max(|g'_{(x)}|) = {{max_df}} < 1 \quad ∀x ∈ [{{a}}, {{b}}] .\]
+    </p>
+    <h5> ⇒Thỏa mãn điều kiện thực hiện phương pháp {{pp}}</h5>
+      </p>
+      <p>
+            Chọn \[ x_0 = \frac{a+b}{2}  = {{x0}} \]
+            
+            Công thức lặp : 
+            <p>
+            \[ x_{n+1} = g_{(x)}  =  {{fx_n_latex}} \]
+            </p>
+            Đánh giá sai số của nghiệm theo công thức hậu nghiệm: 
+            \[|x_n - x^*| ≤ \frac{q}{1-q} \cdot |x_n - x_{n-1}|= ss_n \]
+      </p>
+      <h5>
+        Ta được nghiệm gần đúng : \[ x_{[{{sll}}]} = {{sol}} \] <br>
+        Sai số  \[ss_{[{{sll}}]} = {{err}}\] 
+      </h5>
+      <fieldset> 
+        <br>
+        <a href="{{url_for('plot_png')}}" class = "visit">Đồ thị </a>
+        <a href="{{url_for('table')}}" class = "visit">Bảng sai số</a>
+      </fieldset>
+
+    </form>
+  </div>
+
+</body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+console.log('{{f_latex}}');
+</script>
+</html>

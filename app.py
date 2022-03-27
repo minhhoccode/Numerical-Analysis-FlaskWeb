@@ -60,11 +60,15 @@ def calc():
     a , b = float(a), float(b)
     x = symbols('x')
     t = symbols('t')
+    x_n = symbols('x_n')
     f1 = eval(f_input)
     f_latex = latex(f1)
     f = lambda x : eval (f_input)
     df = lambda x : f(t).diff(t,1).subs(t,x)
     ddf = lambda x: f(t).diff(t,2).subs(t,x)
+    f1 = str(f(x_n))
+    f1 = eval(f1)
+    fx_n_latex = latex(f1)
     if(b - a <=0 ):
         a, b = b ,a
     if(Bisection_Method_Lib.checkCondition(f_input,a,b,pp)):
@@ -75,7 +79,7 @@ def calc():
         if(pp == "Newton cải biên"):
             solArr , errArr, sllArr,min_df, max_df, min_ddf, max_ddf, f_a , f_b, x0, M,m= Bisection_Method_Lib.NewtonExplain(  f_input , a , b , n, n_choose )
         if(pp == "lặp điểm bất động"):
-            solArr , errArr, sllArr = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n, n_choose )
+            solArr , errArr, sllArr, df, dY, x0, Y = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n, n_choose )
     if(Bisection_Method_Lib.checkCondition(f_input , a , b , pp) == False):
         return render_template("result1.html", f = f_input,a=a,b=b, pp = pp, f_latex = f_latex)
     sol = str(solArr[-1])
@@ -83,8 +87,8 @@ def calc():
     sll = sllArr[-1]
     err = stringhandling.handleFloat(err)
     sol = stringhandling.handleFloat(sol)
+    x_n = symbols('x_n')
     if(pp == "Newton" or pp == "Newton cải biên"):
-        x_n = symbols('x_n')
         minmax_df = min_df * max_df 
         minmax_ddf = min_ddf * max_ddf
         f_ab = f_a * f_b
@@ -102,9 +106,6 @@ def calc():
         f1 = str(ddf(x))
         f1 = eval(f1)
         ddf_latex = latex(f1)
-        f1 = str(f(x_n))
-        f1 = eval(f1)
-        fx_n_latex = latex(f1)
         if(pp == "Newton"):
             f1 = str(df(x_n))
             f1 = eval(f1)
@@ -114,6 +115,20 @@ def calc():
             f_x0 = f(x0) 
             f_x0 = "{:.2f}".format(f_x0)
             return render_template("GiaiBaiTapNewtonMoRong.html",f_x0 = f_x0,fx_n_latex = fx_n_latex,  M=M, m=m,x0 = x0, f_ab = f_ab, minmax_ddf = minmax_ddf ,minmax_df=minmax_df,ddf_latex = ddf_latex,df_latex = df_latex, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll,  min_df = min_df, max_df = max_df, min_ddf = min_ddf, max_ddf = max_ddf, f_a = f_a, f_b = f_b)
+    if(pp == "lặp điểm bất động"):
+        # x0 = (a+b)/2
+        max_f,min_f = max(Y),min(Y)
+        if abs(max(dY)) > abs(min(dY)):
+            max_df = abs(max(dY))
+        if abs(max(dY)) <= abs(min(dY)):
+            max_df = abs(min(dY))
+
+        max_f , min_f,x0, max_df =  "{:.2f}".format(max_f), "{:.2f}".format(min_f),  "{:.2f}".format(x0), "{:.2f}".format(max_df)
+        f1 = str(df(x))
+        f1 = eval(f1)
+        df_latex = latex(f1)
+    
+        return render_template('LapDiemBatDong.html', x0 = x0,fx_n_latex = fx_n_latex ,df_latex = df_latex, max_df = max_df,  max_f = max_f,min_f=min_f, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
     return render_template('result.html', n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
 
 
