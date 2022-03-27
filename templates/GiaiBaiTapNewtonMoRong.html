@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="https://www.google.com">Trợ giúp</a></li>
+                <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact>
+      <h3>Giải chi tiết theo phương pháp {{pp}} </h3>
+      <p> \[f(x) = {{f_latex}}\] </p>
+      <p>  \[  a = {{a}} \] 
+        \[b = {{b}}\]  <br>
+         <h3>Giải</h3>
+      <p>Ta có: <br>
+        \[min(f'_{(x)}) = {{min_df}} ≤ f'_{(x)} = {{df_latex}} ≤ max(f'_{(x)}) = {{max_df}},  \quad ∀x ∈ [{{a}}, {{b}}] .\]
+        \[min(f^{"}_{(x)}) = {{min_ddf}} ≤ f^{"}_{(x)} = {{ddf_latex}} ≤ max(f^{"}_{(x)}) = {{max_ddf}},  \quad ∀x ∈ [{{a}}, {{b}}] .\] 
+        Mặt khác \[min(f'_{(x)}) \cdot max(f'_{(x)})   ={{min_df}} \cdot  {{max_df}} = {{minmax_df}} > 0\] 
+        \[min(f^{"}_{(x)}) \cdot max(f^{"}_{(x)}) = {{min_ddf}} \cdot  {{max_ddf}} = {{minmax_ddf}} > 0\] 
+        ⇒ Thỏa mãn điều kiện 1: f', f" không đổi dấu trên [{{a}}, {{b}}] <br>
+        Lại có: \[f_{(a)} \cdot f_{(b)} ={{f_a}} \cdot {{f_b}} = {{f_ab}} < 0 \]
+        ⇒ Thỏa mãn điều kiện 2    </p>
+    <h5> ⇒Thỏa mãn điều kiện thực hiện phương pháp {{pp}}</h5>
+      </p>
+      <p>
+          Nhận xét f({{x0}}) cùng dấu với f"  \[ ⇒ x_0 = {{x0}}\]. Công thức lặp:
+            \[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_0)} = x_n - \frac{ {{fx_n_latex}} }{ {{f_x0}} }   \]
+          Công thức sai số: 
+          \[|x_n - x^*| ≤ \frac{M}{2m} \cdot {|x_n-x_{n-1}|}^2 = ss_{[n]} \]
+          Trong đó:
+            \[|f^{"}_{(x)}| = | {{ddf_latex}} | ≤ {{M}}\quad ∀x ∈ [{{a}}, {{b}}] ⇒ M = {{M}} \]
+            \[m = min(|f'_{({{a}})}| ,|f'_{({{b}})}|) ={{m}} \] 
+      </p>
+      <h5>
+        Nghiệm gần đúng : \[ x_{[{{sll}}]} = {{sol}} \] <br>
+        Sai số  \[ss_{[{{sll}}]} = {{err}}\] 
+      </h5>
+      <fieldset> 
+        <br>
+        <a href="{{url_for('plot_png')}}" class = "visit">Đồ thị </a>
+        <a href="{{url_for('table')}}" class = "visit">Bảng sai số</a>
+      </fieldset>
+
+    </form>
+  </div>
+
+</body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+console.log('{{f_latex}}');
+</script>
+</html>
