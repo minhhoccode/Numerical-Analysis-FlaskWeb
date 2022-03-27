@@ -14,6 +14,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+# @app.route('/GiaiBaiTap')
+# def GiaiBaiTap():
+#     return render_template("GiaiBaiTapNewTon.html", n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll,  min_df = min_df, max_df = max_df, min_ddf = min_ddf, max_ddf = max_ddf, f_a = f_a, f_b = f_b)
+
 
 @app.route('/plot_png')
 
@@ -39,7 +43,7 @@ def create_figure():
 @app.route('/calc' , methods=['POST' , 'GET'])
 
 def calc():
-    global f_input,n,a,b, solArr, errArr,pp, f_latex,n_choose, sllArr
+    global f_input,n,a,b, solArr, errArr,pp, f_latex,n_choose, sllArr, min_df, max_df, min_ddf, max_ddf, f_a , f_b, sol, err, sll
     f_input = request.form['f(x)']
     f_input = stringhandling.stringhandling(f_input)
     n_choose  = str(request.form['n_choose'])
@@ -59,10 +63,10 @@ def calc():
     if(Bisection_Method_Lib.checkCondition(f_input,a,b,pp)):
         if(pp == "chia đôi"):
             solArr , errArr, sllArr = Bisection_Method_Lib.bisection (  f_input, a , b , n, n_choose )
-        if(pp == "newton"):
-            solArr , errArr, sllArr = Bisection_Method_Lib.newton(f_input , a , b , n, n_choose )
-        if(pp == "newton cải biên"):
-            solArr , errArr, sllArr = Bisection_Method_Lib.newtonExplain(  f_input , a , b , n, n_choose )
+        if(pp == "Newton"):
+            solArr , errArr, sllArr,min_df, max_df, min_ddf, max_ddf, f_a , f_b = Bisection_Method_Lib.Newton(f_input , a , b , n, n_choose )
+        if(pp == "Newton cải biên"):
+            solArr , errArr, sllArr = Bisection_Method_Lib.NewtonExplain(  f_input , a , b , n, n_choose )
         if(pp == "lặp điểm bất động"):
             solArr , errArr, sllArr = Bisection_Method_Lib.repeatFixedPoint(  f_input , a , b , n, n_choose )
     if(Bisection_Method_Lib.checkCondition(f_input , a , b , pp) == False):
@@ -72,7 +76,14 @@ def calc():
     sll = sllArr[-1]
     err = stringhandling.handleFloat(err)
     sol = stringhandling.handleFloat(sol)
-    return render_template('result.html', f = f_input, n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
+    if(pp == "Newton"):
+        max_ddf = "{:.2f}".format(max_ddf)
+        min_ddf = "{:.2f}".format(min_ddf)
+        max_df = "{:.2f}".format(max_df)
+        min_df = "{:.2f}".format(min_df)
+        print(min_df)
+        return render_template("GiaiBaiTapNewton.html", n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll,  min_df = min_df, max_df = max_df, min_ddf = min_ddf, max_ddf = max_ddf, f_a = f_a, f_b = f_b)
+    return render_template('result.html', n = n, sol = sol, err = err,a=a,b=b, pp = pp, f_latex= f_latex, sll = sll)
 
 
 @app.route('/table', methods = ['GET', 'POST'])
@@ -85,4 +96,4 @@ def table():
 # from pyfladesk import init_gui #dùng khi build ứng dụng
 if __name__ == '__main__':
     app.run()       #dùng khi build web
-#     init_gui(app) #dùng khi muốn build ra ứng dụng
+    # init_gui(app) #dùng khi muốn build ra ứng dụng

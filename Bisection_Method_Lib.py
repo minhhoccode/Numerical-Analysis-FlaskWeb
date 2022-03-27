@@ -26,7 +26,7 @@ def checkCondition(f_input , a , b , pp):
             return False
         return True
 
-    if(pp == "newton" or pp == "newton cải biên"):
+    if(pp == "Newton" or pp == "Newton cải biên"):
         #đk 1: f' và f'' không đổi dấu trên [a,b]
         if min(dY)*max(dY)<0:
             return False
@@ -97,7 +97,7 @@ def bisection ( f_input , a , b , n, n_choose):
     return sol, err, sll
 
 
-def newton(f_input, a, b, n, n_choose):
+def Newton(f_input, a, b, n, n_choose):
     sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     x = symbols('x')
     t = symbols('t')
@@ -108,7 +108,7 @@ def newton(f_input, a, b, n, n_choose):
     dY = [df(x) for x in X]
     ddY = [ddf(x) for x in X]
     #df, ddf không đổi dấu 
-    #Phương pháp newton sau n bước lặp
+    #Phương pháp Newton sau n bước lặp
     #chọn x0 sao cho f(x0)*ddf>0 (chọn 1 trong 2 cận a,b )
     if(f(a)*ddf(a)>=0):
         x0 = a
@@ -137,10 +137,10 @@ def newton(f_input, a, b, n, n_choose):
             sll.append(_)
             if ss < n:
                 break
-    return sol, err, sll
+    return sol, err, sll, min(dY), max(dY), min(ddY), max(ddY), f(a) , f(b)
 
 
-def newtonExplain(f_input, a, b, n, n_choose):
+def NewtonExplain(f_input, a, b, n, n_choose):
     sll, sol, err = arr.array('i'),arr.array('d'), arr.array('d')
     x = symbols('x')
     t = symbols('t')

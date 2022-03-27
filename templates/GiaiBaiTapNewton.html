@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numberical Method</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+
+<!-- <form id=contact action="/calc" method="post"> -->
+  <section class="header">
+    <nav>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{{url_for('home')}}">Trang chủ</a></li> 
+                <li><a href="https://www.google.com">Trợ giúp</a></li>
+                <li><a href="https://www.facebook.com/minhz30092003">Về tôi </a></li>
+
+            </ul>
+        </div>
+    </nav>
+  </section>
+  <div class="container"> 
+    <form id=contact>
+      <h3>Giải chi tiết theo phương pháp {{pp}} </h3>
+      <h5> \[f(x) = {{f_latex}}\] </h5>
+      <h5>  \[  a = {{a}} \] 
+        \[b = {{b}}\]  <br>
+         Nghiệm gần đúng : \[ x_{[{{sll}}]} = {{sol}} \] <br>
+         Sai số  \[ss_{[{{sll}}]} = {{err}}\] <br>
+         <h3>Giải</h3>
+      <h5>Ta có: <br>
+        \[ {{min_df}} ≤ f'_{x} = {{df_latex}} ≤ {{max_df}},  \quad ∀x ∈ [{{a}}, {{b}}] .\]
+        \[{{min_ddf}} ≤ f"_{x} = {{ddf_latex}} ≤ {{max_ddf}},  \quad ∀x ∈ [{{a}}, {{b}}] .\] 
+        Mặt khác \[{{min_df}} \cdot  {{max_df}} > 0\] 
+        \[{{min_ddf}} \cdot  {{max_ddf}} > 0\] 
+        ⇒ Thỏa mãn điều kiện 1: f', f" không đổi dấu trên [{{a}}, {{b}}] <br>
+        Lại có: \[f_{(a)} \cdot f_{(b)} ={{f_a}} \cdot {{f_b}} < 0 \]
+        ⇒ Thỏa mãn điều kiện 2 : \[f_{(a)} \cdot f_{(b)} < 0\]
+    </h5>
+    <h3> ⇒Thỏa mãn điều kiện thực hiện phương pháp {{pp}}</h3>
+      
+      </h5>
+
+      <fieldset> 
+        <br>
+        <a href="{{url_for('plot_png')}}" class = "visit">Đồ thị </a>
+        <a href="{{url_for('table')}}" class = "visit">Bảng sai số</a>
+      </fieldset>
+
+    </form>
+  </div>
+
+</body>
+<script type="text/javascript" async="" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+console.log('{{f_latex}}');
+</script>
+</html>
