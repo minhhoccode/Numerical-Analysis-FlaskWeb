@@ -1,4 +1,4 @@
-# Bài tập về nhà toán học tính toán
+# Tính Toán Toán học tính toán
 
 ### đã được push trên web https://numbericalmethod.pythonanywhere.com/
 
@@ -24,8 +24,3 @@
 * Xử lý xâu kí tự nằm trong stringhandling
 * Phần giao diện được lưu trong templates, Statics/Stylesheet
 
-
-## Tự đánh giá
-* em nghĩ bên trong chương trình vẫn còn nhiều đoạn code dư thừa, chúng chạy được là chính chứ chưa hoàn toàn tối ưu, mong thầy nhận xét để em có thể bổ sung thêm vào chương trình, biến nó thành một chương trình hoàn chỉnh
-
-Vũ Ngọc Minh - 66IT5 - 0197266
